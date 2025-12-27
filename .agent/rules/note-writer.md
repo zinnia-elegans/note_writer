@@ -3,6 +3,11 @@ trigger: model_decision
 description: note記事生成
 ---
 
+---
+trigger: model_decision
+description: note記事生成
+---
+
 # Note Article Writer
 
 **説明**: noteで公開する記事を、ユーザーが提示するテーマ・商品リスト・参考情報をもとに共同生成するためのスキルです。移動・出先での作業効率化ガジェット紹介記事を想定しつつ、トーンや構成は任意のテーマに応じて柔軟に調整できます。
@@ -66,6 +71,8 @@ description: note記事生成
 **Claudeのアクション**:
 - 記事タイトル案を3つ提示。
 - 承認されたタイトルで、**即座に `02_article/YYYY-MM-DD_タイトル.md` ファイルを作成**する。
+- **命名規則**: ファイル名には必ず「日付（YYYY-MM-DD）」と「日本語の記事タイトル」を入れ、スペースはアンダースコア（_）で繋ぐこと。
+  - 例：`2026-01-01_2026年最新！持ち運び最強な超小型急速充電器6選.md`
 - ファイルには「H1タイトル」と「導入文」を書き込み、商品セクションのプレースホルダーを用意する。
 - 併せて [02_article/_metadata.json](cci:7://file:///Users/shoheishimizu/Knowledge/note-writer/02_article/_metadata.json:0:0-0:0) に記事情報を追加する。
 
@@ -74,12 +81,14 @@ description: note記事生成
 - ユーザーに「1つ目の商品情報を教えてください」と促す。
 - **入力があった商品を即座に後述の「執筆ルール」に基づき執筆し、記事ファイルをリアルタイムで更新（追記）する**。
 - 更新後、以下の進捗情報を提示し、次の入力を待機する。
-  ```markdown
-  ### 進捗状況: [n / 全体数] 個完了
-  - [x] 商品1: ○○ (反映済み)
-  - [/] 商品2: 次の入力待ち
-  - [ ] 商品3: ...
-  ```
+
+```markdown
+### 進捗状況: [n / 全体数] 個完了
+- [x] 商品1: ○○ (反映済み)
+- [/] 商品2: 次の入力待ち
+- [ ] 商品3: ...
+```
+
 - 目標数に達するまでこのプロセスを繰り返す。
 
 ### Phase 4: 本文完成と確認
@@ -114,8 +123,10 @@ description: note記事生成
 
 ### あわせて読みたいセクションの配置
 - まとめセクション（`## まとめ`）の本文と最終CTAの後に配置。
-- `_metadata.json` からカテゴリやタグが一致する過去記事（published/scheduled）を最大10件抽出。
-- セクション見出し `## あわせて読みたい` を付けて、その後にURLのみを記載。
+- **[_metadata.json](file:///Users/shoheishimizu/Knowledge/note-writer/02_article/_metadata.json) の全件をスキャンし**、カテゴリ・タグが一致するもの、または今回のテーマ（例：iPad、仕事効率化、入力機器）と関連性が高い過去記事（status: published）を**5〜10件**抽出する。
+- タグが完全一致しない場合でも、**読者の興味関心が近いと思われる記事（例：デスク周辺ガジェット、ペーパーレス化）を積極的に含め**、サイト内の回遊性を最大化させる。
+- セクション見出し `## あわせて読みたい` を設ける。
+- **URLを掲載する際は、ノートカードとして正しく表示されるよう、各URLの間に必ず一行以上の空行を入れること。**
 
 ### まとめ（Phase 4 で生成）
 - **2段落構成**: 第1段落（総括）、第2段落（行動促進）。
@@ -127,9 +138,10 @@ description: note記事生成
   ```
 
 ## メタデータ・スケジュール管理
-- `_metadata.json` 更新時、タグには必ず「おすすめガジェット」を先頭に含める。
+- [_metadata.json](file:///Users/shoheishimizu/Knowledge/note-writer/02_article/_metadata.json) 更新時、**新しい記事エントリは必ず配列の末尾に追記する**。
+- タグには必ず「おすすめガジェット」を先頭に含める。
 - カテゴリは指定の5つのカテゴリから厳選する。
-- [schedule_2025_2026.md](cci:7://file:///Users/shoheishimizu/Knowledge/note-writer/04_schedule/schedule_2025_2026.md:0:0-0:0) のタイトルに打ち消し線（`~~タイトル~~`）を追加。
+- [04_schedule/schedule_2025_2026.md](cci:7://file:///Users/shoheishimizu/Knowledge/note-writer/04_schedule/schedule_2025_2026.md:0:0-0:0) のタイトルに打ち消し線（`~~タイトル~~`）を追加。
 
 ## Style & Tone チェックリスト
 - **Warm & Practical**: 温かい語り口と実用的なTips。
