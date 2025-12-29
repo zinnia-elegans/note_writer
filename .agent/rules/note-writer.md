@@ -83,7 +83,7 @@ AIの役割は、提供されたテキスト情報とURLを正確に読み取り
   2. 第2段落（行動促進）: 期待されるアクション・効果。
   3. 第3段落（定型CTA）: 「毎日ガジェット便り」にて、仕事と生活をラクにするガジェット情報を毎日発信している旨と、フォローのお願い。
 ### あわせて読みたい
-- 記事の末尾、`## 最後に` の**前**に配置。[_metadata.json](cci:7://file:///Users/shoheishimizu/Knowledge/note-writer/02_article/_metadata.json:0:0-0:0) からカテゴリ・タグ・テーマが近い過去記事を5〜10件抽出。
+- 記事の末尾、`## 最後に` の**後**に配置。[_metadata.json](file:///Users/shoheishimizu/Knowledge/note-writer/02_article/_metadata.json) からカテゴリ・タグ・テーマが近い過去記事を5〜10件抽出。
 - **各URLの間に必ず一行以上の空行を入れる**（ノートカード表示のため）。
 ---
 ## Style & Tone チェックリスト
