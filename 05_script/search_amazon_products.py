@@ -100,7 +100,9 @@ def main():
             url = item["DetailPageURL"]
             price = "N/A"
             if "Offers" in item and "Listings" in item["Offers"] and len(item["Offers"]["Listings"]) > 0:
-                price = item["Offers"]["Listings"][0]["Price"]["DisplayAmount"]
+                listing = item["Offers"]["Listings"][0]
+                if "Price" in listing and "DisplayAmount" in listing["Price"]:
+                    price = listing["Price"]["DisplayAmount"]
             
             features = []
             if "ItemInfo" in item and "Features" in item["ItemInfo"] and "DisplayValues" in item["ItemInfo"]["Features"]:
